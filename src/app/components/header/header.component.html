@@ -1,0 +1,37 @@
+<header class="navbar navbar-expand-md navbar-dark nga-navbar">
+  <nav class="container" aria-label="Main navigation">
+    <a routerLink="/home" class="navbar-brand" alt="Accueil" aria-label="Reservi">
+      <span class="nga-logo mx-1">Reservi</span>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+      aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mx-auto">
+        <li class="nav-item" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <a class="nav-link" aria-current="page">
+            <i class="fas fa-home me-1"></i>Home
+          </a>
+        </li>
+      </ul>
+
+
+      <ul class="navbar-nav me-auto">
+
+      </ul>
+      <form class="d-flex">
+        <button type="button" class="btn btn-sm me-2" routerLink="/register" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [ngClass]="{'btn-outline-light': isActive('/register'), 'nga-btn-navbar': !isActive('/register')}">
+          <i class="fas fa-user-plus me-2"></i>Sign up
+        </button>
+        <button type="button" class="btn btn-sm me-2" routerLink="/login" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [ngClass]="{'btn-outline-light': isActive('/login'), 'nga-btn-navbar': !isActive('/login')}">
+          <i class="fas fa-sign-in-alt me-2"></i>Login
+        </button>
+      </form>
+    </div>
+  </nav>
+</header>
