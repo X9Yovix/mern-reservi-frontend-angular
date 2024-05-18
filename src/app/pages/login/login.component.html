@@ -1,1 +1,39 @@
-<p>login works!</p>
+<div class="d-flex align-items-center">
+  <div class="form-signin w-100 m-auto">
+    <form class="text-center m-auto" [formGroup]="form" (submit)="onSubmit()">
+      <img class="mb-4" src="../../../assets/images/logo/reservi.png" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+      <div class="form-floating">
+        <input type="email" class="form-control mb-3" id="floatingInput" placeholder="name@example.com"
+          formControlName="email">
+        <label for="floatingInput">Email address</label>
+      </div>
+
+      <div class="mb-3">
+        <small class="alert alert-danger"
+          *ngIf="getFormValues['email'].touched && getFormValues['email'].errors?.['required']">
+          Email is required
+        </small>
+        <small class="alert alert-danger"
+          *ngIf="getFormValues['email'].touched && getFormValues['email'].errors?.['email']">
+          Email is invalid
+        </small>
+      </div>
+
+      <div class="form-floating">
+        <input type="password" class="form-control mb-3" id="floatingPassword" placeholder="Password"
+          formControlName="password">
+        <label for="floatingPassword">Password</label>
+      </div>
+      <div class="mb-3">
+        <small class="alert alert-danger"
+          *ngIf="getFormValues['password'].touched && getFormValues['password'].errors?.['required']">
+          Password is required
+        </small>
+      </div>
+      <button class="btn btn-primary w-100 py-2" type="submit" [disabled]="!form.valid">Sign in</button>
+    </form>
+  </div>
+
+</div>
