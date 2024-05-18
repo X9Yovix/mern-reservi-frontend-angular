@@ -27,6 +27,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.createForm()
+    if (localStorage.getItem('token') !== null) {
+      this.router.navigateByUrl('/home')
+    }
   }
 
   createForm() {
@@ -39,6 +42,7 @@ export class LoginComponent implements OnInit {
   get getFormValues() {
     return this.form.controls
   }
+
   onSubmit() {
     let loadingToastId = this.toast.loading('Loading....')
     this.authService.login(this.form.value)
@@ -51,6 +55,7 @@ export class LoginComponent implements OnInit {
         },
         next: (res) => {
           loadingToastId.close()
+          this.authService.setLoggedIn(true);
           localStorage.setItem("token", res.token);
           localStorage.setItem("user", JSON.stringify(res.user))
           this.toast.success(`${res.message}`, { duration: 2000 })

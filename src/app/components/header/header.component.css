@@ -1,20 +1,24 @@
 .navbar.navbar-dark .navbar-nav .nav-item .nav-link {
   color: white;
   font-weight: 500;
-  border-top: 1px solid #09238d;
-  border-bottom: 1px solid #09238d;
+  border-top: 1px solid #071447;
+  border-bottom: 1px solid #071447;
 }
 
 .navbar.navbar-dark .navbar-nav .nav-item .nav-link:hover {
-  color: yellow;
+  /* color: yellow;
   border-top: 1px solid yellow;
-  border-bottom: 1px solid yellow;
+  border-bottom: 1px solid yellow; */
+  color: white;
+  background-color: #0b5ed7;
+  border-color: #0a58ca;
 }
 
 .nga-navbar {
   -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 11px 10px 0 rgba(0, 0, 0, 0.12);
   box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 11px 10px 0 rgba(0, 0, 0, 0.12);
-  background-color: #09238d;
+  background-color: #071447;
+  /* background-color: #09238d; */
 }
 
 .nga-logo {
@@ -26,9 +30,13 @@
 }
 
 .nga-btn-navbar {
-  color: #fff;
+  /* color: #fff;
   background-color: #1976d2;
-  border-color: #0d6efd;
+  border-color: #0d6efd; */
+  color: #fff;
+  background-color: #071447;
+  border-color: #071447;
+
 }
 
 .nga-btn-navbar:hover {

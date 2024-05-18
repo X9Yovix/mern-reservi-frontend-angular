@@ -8,27 +8,35 @@
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
-      <ul class="navbar-nav mx-auto">
-        <li class="nav-item" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
-          <a class="nav-link" aria-current="page">
-            <i class="fas fa-home me-1"></i>Home
-          </a>
-        </li>
-      </ul>
+      <div class="mx-auto">
+        <button type="button" class="btn btn-sm me-2" routerLink="/home" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [ngClass]="{'btn-outline-light': isActive('/home'), 'nga-btn-navbar': !isActive('/home')}">
+          <i class="fas fa-home me-2"></i>Home
+        </button>
+      </div>
       <ul class="navbar-nav me-auto">
 
       </ul>
       <form class="d-flex">
-        <button type="button" class="btn btn-sm me-2" routerLink="/register" routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          [ngClass]="{'btn-outline-light': isActive('/register'), 'nga-btn-navbar': !isActive('/register')}">
-          <i class="fas fa-user-plus me-2"></i>Sign up
-        </button>
-        <button type="button" class="btn btn-sm me-2" routerLink="/login" routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          [ngClass]="{'btn-outline-light': isActive('/login'), 'nga-btn-navbar': !isActive('/login')}">
-          <i class="fas fa-sign-in-alt me-2"></i>Login
-        </button>
+        <div *ngIf="!isLogged; then thenBlock else elseBlock"></div>
+        <ng-template #thenBlock>
+          <button type="button" class="btn btn-sm me-2" routerLink="/register" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            [ngClass]="{'btn-outline-light': isActive('/register'), 'nga-btn-navbar': !isActive('/register')}">
+            <i class="fas fa-user-plus me-2"></i>Sign up
+          </button>
+          <button type="button" class="btn btn-sm me-2" routerLink="/login" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            [ngClass]="{'btn-outline-light': isActive('/login'), 'nga-btn-navbar': !isActive('/login')}">
+            <i class="fas fa-sign-in-alt me-2"></i>Login
+          </button>
+        </ng-template>
+        <ng-template #elseBlock>
+          <button type="button" class="btn btn-sm me-2 btn-outline-light" (click)="onLogout()">
+            <i class="fa-solid fa-plug-circle-xmark me-2"></i>Logout
+          </button>
+        </ng-template>
       </form>
     </div>
   </nav>
