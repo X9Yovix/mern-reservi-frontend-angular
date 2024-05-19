@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { RoomService } from '../../../services/room/room.service';
-import { Room } from '../../../interfaces/room/room';
+import { RoomService } from '../../../../services/room/room.service';
+import { Room } from '../../../../interfaces/room/room';
 import { CommonModule, DatePipe } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HotToastService } from '@ngxpert/hot-toast';
-import Validation from '../../../utils/validation';
-import { ReservationService } from '../../../services/reservation/reservation.service';
+import Validation from '../../../../utils/validation';
+import { ReservationService } from '../../../../services/reservation/reservation.service';
 import { jwtDecode } from 'jwt-decode';
-import { JwtPayload } from '../../../interfaces/jwt/jwt-payload';
+import { JwtPayload } from '../../../../interfaces/jwt/jwt-payload';
 
 @Component({
   selector: 'app-detail-room',

@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
-import { HomeComponent } from './pages/home/home.component';
-import { NotfoundComponent } from './pages/notfound/notfound.component';
+import { HomeComponent } from './pages/public/home/home.component';
+import { NotfoundComponent } from './pages/public/notfound/notfound.component';
 
 export const routes: Routes = [
   {
     path: "home",
-    loadComponent: () => import('./pages/home/home.component')
+    loadComponent: () => import('./pages/public/home/home.component')
       .then((c) => c.HomeComponent)
   },
   {
@@ -14,22 +14,22 @@ export const routes: Routes = [
   },
   {
     path: "login",
-    loadComponent: () => import('./pages/login/login.component')
+    loadComponent: () => import('./pages/public/login/login.component')
       .then((c) => c.LoginComponent)
   },
   {
     path: "register",
-    loadComponent: () => import('./pages/register/register.component')
+    loadComponent: () => import('./pages/public/register/register.component')
       .then((c) => c.RegisterComponent)
   },
   {
     path: "rooms/list",
-    loadComponent: () => import('./pages/room/list-rooms/list-rooms.component')
+    loadComponent: () => import('./pages/client/room/list-rooms/list-rooms.component')
       .then((c) => c.ListRoomsComponent)
   },
   {
     path: "rooms/detail/:id",
-    loadComponent: () => import('./pages/room/detail-room/detail-room.component')
+    loadComponent: () => import('./pages/client/room/detail-room/detail-room.component')
       .then((c) => c.DetailRoomComponent)
   },
   {
