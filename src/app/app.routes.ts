@@ -18,14 +18,19 @@ export const routes: Routes = [
       .then((c) => c.LoginComponent)
   },
   {
-    path: "rooms/list",
-    loadComponent: () => import('./pages/list-rooms/list-rooms.component')
-      .then((c) => c.ListRoomsComponent)
-  },
-  {
     path: "register",
     loadComponent: () => import('./pages/register/register.component')
       .then((c) => c.RegisterComponent)
+  },
+  {
+    path: "rooms/list",
+    loadComponent: () => import('./pages/room/list-rooms/list-rooms.component')
+      .then((c) => c.ListRoomsComponent)
+  },
+  {
+    path: "rooms/detail/:id",
+    loadComponent: () => import('./pages/room/detail-room/detail-room.component')
+      .then((c) => c.DetailRoomComponent)
   },
   {
     path: '**',

@@ -2,7 +2,7 @@ import { Category } from "../category/category"
 import { Material } from "../material/material"
 
 export interface Room {
-  _id: number,
+  _id: string,
   name: string,
   description: string,
   length: number,

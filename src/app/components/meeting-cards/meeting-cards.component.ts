@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Room } from '../../interfaces/room/room';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-meeting-cards',
@@ -13,7 +14,11 @@ export class MeetingCardsComponent {
   @Input() room!: Room
   @Input() key!: number
 
-  backendUrl: string = 'http://localhost:4000'
+  backendUrl: string = "http://localhost:4000"
+
+  constructor(
+    private router: Router
+  ) { }
 
   getCarouselId() {
     return 'room' + this.key
@@ -23,7 +28,7 @@ export class MeetingCardsComponent {
     return `${this.backendUrl}/${imagePath}`
   }
 
-  viewRoom(roomId: number) {
-    console.log('Viewing room', roomId)
+  viewRoom(roomId: string) {
+    this.router.navigateByUrl(`/rooms/detail/${roomId}`)
   }
 }

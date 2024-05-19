@@ -35,4 +35,12 @@ export class RoomService {
         catchError(this.errorHandler)
       )
   }
+
+  fetchRoom(roomId: string): Observable<any> {
+    return this.httpClient
+      .get(`/meeting_rooms/${roomId}`)
+      .pipe(
+        catchError(this.errorHandler)
+      )
+  }
 }

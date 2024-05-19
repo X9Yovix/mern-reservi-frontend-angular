@@ -1,0 +1,98 @@
+<div class="container-fluid">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div *ngFor="let image of room.images; let i = index" class="carousel-item" [class.active]="i === 0">
+            <img [src]="getFullImageUrl(image)" class="d-block w-100" style="object-fit: cover;" width="500"
+              height="500" alt="Room Image">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <div class="card mt-3">
+        <div class="card-body">
+          <h5 class="card-title">{{ room.name }}</h5>
+          <p class="card-text">{{ room.description }}</p>
+          <div *ngFor="let category of room.categories" class="mb-2">
+            <span class="badge bg-primary">{{ category.name }}</span>
+          </div>
+          <p class="card-text">Capacity of this room: {{ room.capacity }}</p>
+          <hr>
+          <p *ngIf="room.availability">
+            This room is currently available for reservation
+          </p>
+          <p *ngIf="!room.availability">
+            This room is currently unavailable for reservation
+          </p>
+        </div>
+      </div>
+      <div *ngIf="room.availability" class="card mt-3 mb-5">
+        <div class="card-body">
+          <h5 class="card-title">Reservation Form</h5>
+          <form [formGroup]="form" (submit)="onSubmit()">
+
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <label for="participants" class="form-label"><i class="fas fa-users"></i> Number of Participants</label>
+                <input type="number" class="form-control" id="participants" name="participants"
+                  formControlName="participants" required>
+                <div *ngIf="getFormValues['participants'].invalid && getFormValues['participants'].touched">
+                  <small class="text-danger" *ngIf="getFormValues['participants'].errors?.['required']">
+                    Number of participants is required
+                  </small>
+                  <small class="text-danger" *ngIf="getFormValues['participants'].errors?.['min']">
+                    Number of participants must be at least 1
+                  </small>
+                </div>
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label for="reservationStart" class="form-label"><i class="far fa-calendar-alt"></i> Start Date</label>
+                <input type="date" class="form-control" id="reservationStart" name="reservationStart"
+                  formControlName="reservationStart" required>
+                <div *ngIf="getFormValues['reservationStart'].invalid && getFormValues['reservationStart'].touched">
+                  <small class="text-danger" *ngIf="getFormValues['reservationStart'].errors?.['required']">
+                    Start date is required
+                  </small>
+                </div>
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label for="reservationEnd" class="form-label"><i class="far fa-calendar-alt"></i> End Date</label>
+                <input type="date" class="form-control" id="reservationEnd" name="reservationEnd"
+                  formControlName="reservationEnd" required>
+                <div *ngIf="getFormValues['reservationEnd'].invalid && getFormValues['reservationEnd'].touched">
+                  <small class="text-danger" *ngIf="getFormValues['reservationEnd'].errors?.['required']">
+                    End date is required
+                  </small>
+                  <small class="text-danger" *ngIf="getFormValues['reservationEnd'].errors?.['invalidEndDate']">
+                    End date must be after or equal to start date
+                  </small>
+                </div>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="additionalInfo" class="form-label"><i class="fas fa-info-circle"></i> Additional
+                Information</label>
+              <textarea class="form-control" id="additionalInfo" name="additionalInfo"
+                formControlName="additionalInfo"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="!form.valid"><i class="fas fa-check"></i> Submit
+              Reservation</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

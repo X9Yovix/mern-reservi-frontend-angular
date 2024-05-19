@@ -1,37 +1,36 @@
 <div class="d-flex align-items-center">
   <div class="form-signin w-100 m-auto">
-    <form class="text-center m-auto" [formGroup]="form" (submit)="onSubmit()">
+    <form [formGroup]="form" (submit)="onSubmit()">
       <img class="mb-4" src="../../../assets/images/logo/reservi.png" alt="" width="72" height="72">
-      <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+      <h1 class="h3 mb-3 fw-normal text-center m-auto">Please sign in</h1>
 
-      <div class="form-floating">
-        <input type="email" class="form-control mb-3" id="floatingInput" placeholder="name@example.com"
-          formControlName="email">
-        <label for="floatingInput">Email address</label>
-      </div>
 
-      <div class="mb-3">
-        <small class="alert alert-danger"
-          *ngIf="getFormValues['email'].touched && getFormValues['email'].errors?.['required']">
-          Email is required
-        </small>
-        <small class="alert alert-danger"
-          *ngIf="getFormValues['email'].touched && getFormValues['email'].errors?.['email']">
-          Email is invalid
-        </small>
+      <div class="col-md-12 mb-3">
+        <label for="floatingInput" class="form-label"><i class="fa-solid fa-envelope"></i> Email</label>
+        <input type="email" class="form-control mb-3" id="floatingInput" name="email" placeholder="name@example.com"
+          formControlName="email" required>
+        <div *ngIf="getFormValues['email'].invalid && getFormValues['email'].touched">
+          <small class="text-danger" *ngIf="getFormValues['email'].errors?.['required']">
+            Email is required
+          </small>
+          <small class="text-danger" *ngIf="getFormValues['email'].errors?.['email']">
+            Email is invalid
+          </small>
+        </div>
       </div>
 
-      <div class="form-floating">
-        <input type="password" class="form-control mb-3" id="floatingPassword" placeholder="Password"
-          formControlName="password">
-        <label for="floatingPassword">Password</label>
+
+      <div class="col-md-12 mb-3">
+        <label for="floatingPassword" class="form-label"><i class="fa-solid fa-lock"></i> Password</label>
+        <input type="password" class="form-control mb-3" id="floatingPassword" name="password"
+          formControlName="password" required>
+        <div *ngIf="getFormValues['password'].invalid && getFormValues['password'].touched">
+          <small class="text-danger" *ngIf="getFormValues['password'].errors?.['required']">
+            Password is required
+          </small>
+        </div>
       </div>
-      <div class="mb-3">
-        <small class="alert alert-danger"
-          *ngIf="getFormValues['password'].touched && getFormValues['password'].errors?.['required']">
-          Password is required
-        </small>
-      </div>
+
       <button class="btn btn-primary w-100 py-2" type="submit" [disabled]="!form.valid">Sign in</button>
     </form>
   </div>

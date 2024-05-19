@@ -1,9 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { MeetingCardsComponent } from '../../components/meeting-cards/meeting-cards.component';
-import { RoomService } from '../../services/room/room.service';
-import { Room } from '../../interfaces/room/room';
+import { MeetingCardsComponent } from '../../../components/meeting-cards/meeting-cards.component';
+import { RoomService } from '../../../services/room/room.service';
 import { Router } from '@angular/router';
+import { Room } from '../../../interfaces/room/room';
 
 @Component({
   selector: 'app-list-rooms',
