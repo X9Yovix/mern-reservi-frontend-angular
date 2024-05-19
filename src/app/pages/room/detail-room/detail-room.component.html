@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div *ngIf="room" class="container-fluid">
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
@@ -21,18 +21,42 @@
       </div>
       <div class="card mt-3">
         <div class="card-body">
-          <h5 class="card-title">{{ room.name }}</h5>
-          <p class="card-text">{{ room.description }}</p>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="card-text">
+                <h5 class="card-title">{{ room.name }}</h5>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="card-text text-end">
+                <p class="d-inline-flex gap-1">
+                  <button class="btn btn-primary btn-sm" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Description
+                  </button>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-text">
+
+            <div class="collapse" id="collapseExample">
+              <div class="card card-body">
+                {{ room.description }}
+              </div>
+            </div>
+          </div>
           <div *ngFor="let category of room.categories" class="mb-2">
             <span class="badge bg-primary">{{ category.name }}</span>
           </div>
           <p class="card-text">Capacity of this room: {{ room.capacity }}</p>
           <hr>
           <p *ngIf="room.availability">
-            This room is currently available for reservation
+            <i class="fa-regular fa-circle-check text-success"></i> This room is currently available for reservation
           </p>
           <p *ngIf="!room.availability">
-            This room is currently unavailable for reservation
+            <i class="fa-solid fa-ban text-danger"></i>This room is currently unavailable for reservation
           </p>
         </div>
       </div>
@@ -83,8 +107,8 @@
             </div>
 
             <div class="mb-3">
-              <label for="additionalInfo" class="form-label"><i class="fas fa-info-circle"></i> Additional
-                Information</label>
+              <label for="additionalInfo" class="form-label"><i class="fas fa-info-circle"></i>
+                Additional Information</label>
               <textarea class="form-control" id="additionalInfo" name="additionalInfo"
                 formControlName="additionalInfo"></textarea>
             </div>
