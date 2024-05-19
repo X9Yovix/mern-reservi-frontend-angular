@@ -14,6 +14,11 @@
           [ngClass]="{'btn-outline-light': isActive('/home'), 'nga-btn-navbar': !isActive('/home')}">
           <i class="fas fa-home me-2"></i>Home
         </button>
+        <button type="button" class="btn btn-sm me-2" routerLink="/rooms/list" routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+          [ngClass]="{'btn-outline-light': isActive('/rooms/list'), 'nga-btn-navbar': !isActive('/rooms/list')}">
+          <i class="fa-solid fa-people-roof me-2"></i>Rooms
+        </button>
       </div>
       <ul class="navbar-nav me-auto">
 

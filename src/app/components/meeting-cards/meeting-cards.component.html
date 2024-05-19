@@ -1,0 +1,25 @@
+<div class="card mb-4">
+  <div [id]="getCarouselId()" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div *ngFor="let image of room.images; let i = index" class="carousel-item" [class.active]="i === 0">
+        <img class="d-block w-100" style="height: 200px; object-fit: cover;" [src]="getFullImageUrl(image)"
+          alt="{{ room.name }}">
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" [attr.data-bs-target]="'#' + getCarouselId()"
+      data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" [attr.data-bs-target]="'#' + getCarouselId()"
+      data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+
+  <div class="card-body text-center">
+    <h5 class="card-title">{{ room.name }}</h5>
+    <button class="btn btn-primary" (click)="viewRoom(room.id)">View Room</button>
+  </div>
+</div>

@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 py-2">
+      <h2 class="text-center">List of Rooms</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4" *ngFor="let room of rooms; let i = index">
+      <app-meeting-cards [room]="room" [key]="i"></app-meeting-cards>
+    </div>
+  </div>
+
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <button class="page-link" (click)="changePage(currentPage - 1)">Previous</button>
+      </li>
+      <ng-container *ngFor="let page of totalPagesArray">
+        <li class="page-item" [class.active]="currentPage === page">
+          <button class="page-link" (click)="changePage(page)">{{ page }}</button>
+        </li>
+      </ng-container>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <button class="page-link" (click)="changePage(currentPage + 1)">Next</button>
+      </li>
+    </ul>
+  </nav>
+
+</div>
