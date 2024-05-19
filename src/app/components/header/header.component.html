@@ -14,18 +14,24 @@
           [ngClass]="{'btn-outline-light': isActive('/home'), 'nga-btn-navbar': !isActive('/home')}">
           <i class="fas fa-home me-2"></i>Home
         </button>
-        <button type="button" class="btn btn-sm me-2" routerLink="/rooms/list" routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-          [ngClass]="{'btn-outline-light': isActive('/rooms/list'), 'nga-btn-navbar': !isActive('/rooms/list')}">
-          <i class="fa-solid fa-people-roof me-2"></i>Rooms
-        </button>
+        <div *ngIf="!isLogged; then thenBlockMxAuto else elseBlockxAuto"></div>
+        <ng-template #thenBlockMxAuto>
+        </ng-template>
+        <ng-template #elseBlockxAuto>
+          <button type="button" class="btn btn-sm me-2" routerLink="/rooms/list" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            [ngClass]="{'btn-outline-light': isActive('/rooms/list'), 'nga-btn-navbar': !isActive('/rooms/list')}">
+            <i class="fa-solid fa-people-roof me-2"></i>Rooms
+          </button>
+
+        </ng-template>
       </div>
       <ul class="navbar-nav me-auto">
 
       </ul>
       <form class="d-flex">
-        <div *ngIf="!isLogged; then thenBlock else elseBlock"></div>
-        <ng-template #thenBlock>
+        <div *ngIf="!isLogged; then thenBlockMeAuto else elseBlockeAuto"></div>
+        <ng-template #thenBlockMeAuto>
           <button type="button" class="btn btn-sm me-2" routerLink="/register" routerLinkActive="active"
             [routerLinkActiveOptions]="{ exact: true }"
             [ngClass]="{'btn-outline-light': isActive('/register'), 'nga-btn-navbar': !isActive('/register')}">
@@ -37,7 +43,7 @@
             <i class="fas fa-sign-in-alt me-2"></i>Login
           </button>
         </ng-template>
-        <ng-template #elseBlock>
+        <ng-template #elseBlockeAuto>
           <button type="button" class="btn btn-sm me-2 btn-outline-light" (click)="onLogout()">
             <i class="fa-solid fa-plug-circle-xmark me-2"></i>Logout
           </button>

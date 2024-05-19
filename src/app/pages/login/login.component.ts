@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("token", res.token);
           localStorage.setItem("user", JSON.stringify(res.user))
           this.toast.success(`${res.message}`, { duration: 2000 })
-          this.router.navigateByUrl('/home')
+          this.router.navigateByUrl('/rooms/list')
         }
       })
   }
