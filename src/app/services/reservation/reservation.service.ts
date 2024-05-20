@@ -30,9 +30,17 @@ export class ReservationService {
   }
 
 
-  reservation(reservation: any): Observable<any> {
+  createReservation(reservation: any): Observable<any> {
     return this.httpClient
       .post(`/reservations`, JSON.stringify(reservation), this.httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      )
+  }
+
+  fetchMyReservations(page: number, size: number, userId: string): Observable<any> {
+    return this.httpClient
+      .get(`/reservations/user/${userId}?page=${page}&pageSize=${size}`, this.httpOptions)
       .pipe(
         catchError(this.errorHandler)
       )

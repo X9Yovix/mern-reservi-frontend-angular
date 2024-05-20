@@ -23,6 +23,11 @@
             [ngClass]="{'btn-outline-light': isActive('/rooms/list'), 'nga-btn-navbar': !isActive('/rooms/list')}">
             <i class="fa-solid fa-people-roof me-2"></i>Rooms
           </button>
+          <button type="button" class="btn btn-sm me-2" routerLink="/reservations/list" routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+            [ngClass]="{'btn-outline-light': isActive('/reservations/list'), 'nga-btn-navbar': !isActive('/reservations/list')}">
+            <i class="fa-regular fa-clock me-2"></i>My Reservations
+          </button>
 
         </ng-template>
       </div>

@@ -95,7 +95,7 @@ export class DetailRoomComponent implements OnInit {
         users: userId,
         meeting_rooms: this.route.snapshot.paramMap.get('id')
       }
-      this.reservationService.reservation(data)
+      this.reservationService.createReservation(data)
         .subscribe({
           complete: () => {
           },
@@ -107,7 +107,7 @@ export class DetailRoomComponent implements OnInit {
             loadingToastId.close()
             this.toast.success(`${res.message}`, { duration: 2000 })
             this.form.reset()
-            //this.router.navigateByUrl('/reservations/client/list')
+            //this.router.navigateByUrl('/reservations/list')
           }
         })
     }

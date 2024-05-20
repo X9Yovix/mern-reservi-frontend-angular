@@ -1,0 +1,73 @@
+<div class="container mt-5">
+  <h2>List of Reservations</h2>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Status</th>
+          <th>Participants</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Additional Information</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td>{{ reservation.meeting_rooms.name }}</td>
+          <td>
+            <span class="badge" [ngClass]="{
+              'bg-secondary': reservation.status === 'pending',
+              'bg-success': reservation.status === 'confirmed',
+              'bg-danger': reservation.status === 'rejected',
+              'bg-warning': reservation.status === 'canceled'
+            }">
+              {{ reservation.status | uppercase }}
+            </span>
+          </td>
+          <td>{{ reservation.participants }}</td>
+          <td>{{ reservation.start_date | date: 'dd MMMM yyyy' }}</td>
+          <td>{{ reservation.end_date | date: 'dd MMMM yyyy' }}</td>
+
+          <td>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+              [attr.data-bs-target]="'#descriptionModal' + reservation._id">
+              Show Description
+            </button>
+            <div class="modal fade" [id]="'descriptionModal' + reservation._id" tabindex="-1"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Description</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    {{ reservation.additional_info || 'No additional information' }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+      <li class="page-item" [class.disabled]="currentPage === 1">
+        <button class="page-link" (click)="changePage(currentPage - 1)">Previous</button>
+      </li>
+      <ng-container *ngFor="let page of totalPagesArray">
+        <li class="page-item" [class.active]="currentPage === page">
+          <button class="page-link" (click)="changePage(page)">{{ page }}</button>
+        </li>
+      </ng-container>
+      <li class="page-item" [class.disabled]="currentPage === totalPages">
+        <button class="page-link" (click)="changePage(currentPage + 1)">Next</button>
+      </li>
+    </ul>
+  </nav>
+
+</div>

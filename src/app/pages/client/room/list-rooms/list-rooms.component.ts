@@ -4,6 +4,7 @@ import { MeetingCardsComponent } from '../../../../components/meeting-cards/meet
 import { RoomService } from '../../../../services/room/room.service';
 import { Router } from '@angular/router';
 import { Room } from '../../../../interfaces/room/room';
+import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
   selector: 'app-list-rooms',
@@ -24,7 +25,8 @@ export class ListRoomsComponent {
 
   constructor(
     private roomService: RoomService,
-    private router: Router
+    private router: Router,
+    private toast: HotToastService
   ) { }
 
   ngOnInit() {
@@ -36,6 +38,13 @@ export class ListRoomsComponent {
 
   fetchRooms(page: number) {
     this.roomService.fetchRooms(page)
+      .pipe(
+        this.toast.observe({
+          loading: 'Loading rooms...',
+          success: 'Rooms loaded',
+          error: 'Failed to load rooms'
+        })
+      )
       .subscribe((res: any) => {
         this.rooms = res.meeting_rooms
         this.totalPages = res.total_pages

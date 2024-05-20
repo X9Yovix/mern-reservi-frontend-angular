@@ -33,6 +33,11 @@ export const routes: Routes = [
       .then((c) => c.DetailRoomComponent)
   },
   {
+    path: "reservations/list",
+    loadComponent: () => import('./pages/client/reservation/list-reservations/list-reservations.component')
+      .then((c) => c.ListReservationsComponent)
+  },
+  {
     path: '**',
     component: NotfoundComponent
   }
