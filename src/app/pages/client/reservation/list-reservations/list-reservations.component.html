@@ -31,9 +31,9 @@
           <td>{{ reservation.end_date | date: 'dd MMMM yyyy' }}</td>
 
           <td>
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+            <button type="button" class="btn btn-light btn-sm" data-bs-toggle="modal"
               [attr.data-bs-target]="'#descriptionModal' + reservation._id">
-              Show Description
+              <i class="fa-solid fa-circle-info"></i> Show Description
             </button>
             <div class="modal fade" [id]="'descriptionModal' + reservation._id" tabindex="-1"
               aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -52,7 +52,7 @@
           </td>
           <td>
             <div *ngIf="reservation.status === 'pending'">
-              <button class="btn btn-success" (click)="cancelReservation(reservation._id)">Cancel</button>
+              <button class="btn btn-outline-warning btn-sm" (click)="cancelReservation(reservation._id)"><i class="fa-solid fa-xmark me-1"></i> Cancel</button>
             </div>
           </td>
         </tr>
