@@ -34,6 +34,7 @@ export class DetailRoomComponent implements OnInit {
     private toast: HotToastService,
     private datePipe: DatePipe
   ) { }
+  
   ngOnInit(): void {
     this.fetchRoom()
     this.createForm()

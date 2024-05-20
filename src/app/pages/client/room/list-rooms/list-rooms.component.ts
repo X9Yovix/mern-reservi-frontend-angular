@@ -30,9 +30,6 @@ export class ListRoomsComponent {
   ) { }
 
   ngOnInit() {
-    if (localStorage.getItem("token") === null) {
-      this.router.navigateByUrl("/login")
-    }
     this.fetchRooms(this.currentPage)
   }
 
@@ -40,9 +37,9 @@ export class ListRoomsComponent {
     this.roomService.fetchRooms(page)
       .pipe(
         this.toast.observe({
-          loading: 'Loading rooms...',
-          success: 'Rooms loaded',
-          error: 'Failed to load rooms'
+          loading: { content: 'Loading rooms...', position: 'bottom-center'},
+          success: { content: 'Rooms loaded', position: 'bottom-center', duration: 1000 },
+          error: { content: 'Failed to load rooms', position: 'bottom-center', duration: 1000 }
         })
       )
       .subscribe((res: any) => {

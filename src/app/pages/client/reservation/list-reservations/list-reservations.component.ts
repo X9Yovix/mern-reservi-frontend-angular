@@ -4,7 +4,6 @@ import { ReservationService } from '../../../../services/reservation/reservation
 import { JwtPayload } from '../../../../interfaces/jwt/jwt-payload';
 import { jwtDecode } from 'jwt-decode';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
 import { HotToastService } from '@ngxpert/hot-toast';
 
 @Component({
@@ -24,17 +23,12 @@ export class ListReservationsComponent implements OnInit {
   totalPagesArray: number[] = []
 
   constructor(
-    private router: Router,
     private reservationService: ReservationService,
     private toast: HotToastService
   ) { }
 
   ngOnInit() {
-    if (!localStorage.getItem("token")) {
-      this.router.navigateByUrl("/login")
-    } else {
-      this.fetchMyReservations(this.currentPage)
-    }
+    this.fetchMyReservations(this.currentPage)
   }
 
   fetchMyReservations(page: number) {
@@ -45,9 +39,9 @@ export class ListReservationsComponent implements OnInit {
       this.reservationService.fetchMyReservations(page, this.itemsPerPage, userId!)
         .pipe(
           this.toast.observe({
-            loading: 'Loading reservations...',
-            success: 'Reservations loaded',
-            error: 'Failed to load reservations'
+            loading: { content: 'Loading reservations...', position: 'bottom-center' },
+            success: { content: 'Reservations loaded', position: 'bottom-center', duration: 1000 },
+            error: { content: 'Failed to load reservations', position: 'bottom-center', duration: 1000 }
           })
         )
         .subscribe({
