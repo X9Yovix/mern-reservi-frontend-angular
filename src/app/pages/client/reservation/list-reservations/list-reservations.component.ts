@@ -34,7 +34,6 @@ export class ListReservationsComponent implements OnInit {
   fetchMyReservations(page: number) {
     const token = localStorage.getItem('token')
     if (token) {
-
       const userId = jwtDecode<JwtPayload>(token)?._id
       this.reservationService.fetchMyReservations(page, this.itemsPerPage, userId!)
         .pipe(
@@ -82,5 +81,26 @@ export class ListReservationsComponent implements OnInit {
     const startIndex = (this.currentPage - 1) * this.itemsPerPage
     const endIndex = Math.min(startIndex + this.itemsPerPage, this.reservations.length)
     this.reservations = this.reservations.slice(startIndex, endIndex)
+  }
+
+  cancelReservation(id: string) {
+    this.reservationService.cancelReservation(id)
+      .pipe(
+        this.toast.observe({
+          loading: { content: 'Loading...', position: 'bottom-center' },
+          success: { content: 'Reservation canceled', position: 'bottom-center', duration: 2000 },
+          error: { content: 'Failed to cancel reservation', position: 'bottom-center', duration: 2000 }
+        })
+      )
+      .subscribe({
+        complete: () => {
+        },
+        error: (err) => {
+          this.toast.error(`${JSON.parse(err).error}`, { position: 'bottom-center' })
+        },
+        next: (res) => {
+          this.fetchMyReservations(this.currentPage)
+        }
+      })
   }
 }

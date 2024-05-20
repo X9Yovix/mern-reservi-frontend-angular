@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MeetingCardsComponent } from '../../../../components/meeting-cards/meeting-cards.component';
 import { RoomService } from '../../../../services/room/room.service';
-import { Router } from '@angular/router';
 import { Room } from '../../../../interfaces/room/room';
 import { HotToastService } from '@ngxpert/hot-toast';
 
@@ -25,7 +24,6 @@ export class ListRoomsComponent {
 
   constructor(
     private roomService: RoomService,
-    private router: Router,
     private toast: HotToastService
   ) { }
 
@@ -37,7 +35,7 @@ export class ListRoomsComponent {
     this.roomService.fetchRooms(page)
       .pipe(
         this.toast.observe({
-          loading: { content: 'Loading rooms...', position: 'bottom-center'},
+          loading: { content: 'Loading rooms...', position: 'bottom-center' },
           success: { content: 'Rooms loaded', position: 'bottom-center', duration: 1000 },
           error: { content: 'Failed to load rooms', position: 'bottom-center', duration: 1000 }
         })

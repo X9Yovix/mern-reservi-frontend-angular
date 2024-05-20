@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError, throwError } from 'rxjs';
-import { Reservation } from '../../interfaces/reservation/reservation';
 
 @Injectable({
   providedIn: 'root'
@@ -41,6 +40,14 @@ export class ReservationService {
   fetchMyReservations(page: number, size: number, userId: string): Observable<any> {
     return this.httpClient
       .get(`/reservations/user/${userId}?page=${page}&pageSize=${size}`, this.httpOptions)
+      .pipe(
+        catchError(this.errorHandler)
+      )
+  }
+
+  cancelReservation(reservationId: string): Observable<any> {
+    return this.httpClient
+      .put(`/reservations/state/decision/${reservationId}`, { state: 2 }, this.httpOptions)
       .pipe(
         catchError(this.errorHandler)
       )

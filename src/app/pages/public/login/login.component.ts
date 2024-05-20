@@ -41,21 +41,17 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    let loadingToastId = this.toast.loading('Loading....')
     this.authService.login(this.form.value)
       .subscribe({
         complete: () => {
         },
         error: (err) => {
-          loadingToastId.close()
-          this.toast.error(`${JSON.parse(err).error}`)
+          this.toast.error(`${JSON.parse(err).error}`, { duration: 2000, position: 'bottom-center' })
         },
         next: (res) => {
-          loadingToastId.close()
           this.authService.setLoggedIn(true);
           localStorage.setItem("token", res.token);
           localStorage.setItem("user", JSON.stringify(res.user))
-          this.toast.success(`${res.message}`, { duration: 2000 })
           this.router.navigateByUrl('/rooms/list')
         }
       })

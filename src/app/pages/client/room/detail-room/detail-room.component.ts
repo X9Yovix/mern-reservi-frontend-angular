@@ -34,7 +34,7 @@ export class DetailRoomComponent implements OnInit {
     private toast: HotToastService,
     private datePipe: DatePipe
   ) { }
-  
+
   ngOnInit(): void {
     this.fetchRoom()
     this.createForm()
@@ -79,39 +79,38 @@ export class DetailRoomComponent implements OnInit {
   }
 
   onSubmit() {
-    let loadingToastId = this.toast.loading('Loading....')
-    const token = localStorage.getItem('token')
-    if (token === null) {
-      this.toast.error("You need to login first")
-      return
-    } else {
-      const decoded = jwtDecode<JwtPayload>(token)
-      const userId = decoded._id
-      const inputStartDate = this.formatDate(this.form.value.reservationStart)
-      const inputEndDate = this.formatDate(this.form.value.reservationEnd)
-      const data = {
-        participants: this.form.value.participants,
-        additional_info: this.form.value.additional_info || "",
-        reservation_range: [inputStartDate, inputEndDate],
-        users: userId,
-        meeting_rooms: this.route.snapshot.paramMap.get('id')
-      }
-      this.reservationService.createReservation(data)
-        .subscribe({
-          complete: () => {
-          },
-          error: (err) => {
-            loadingToastId.close()
-            this.toast.error(`${JSON.parse(err).error}`)
-          },
-          next: (res) => {
-            loadingToastId.close()
-            this.toast.success(`${res.message}`, { duration: 2000 })
-            this.form.reset()
-            //this.router.navigateByUrl('/reservations/list')
-          }
-        })
+    const token = localStorage.getItem("token")
+    const decoded = jwtDecode<JwtPayload>(token!)
+    const userId = decoded._id
+    const inputStartDate = this.formatDate(this.form.value.reservationStart)
+    const inputEndDate = this.formatDate(this.form.value.reservationEnd)
+    const data = {
+      participants: this.form.value.participants,
+      additional_info: this.form.value.additional_info || "",
+      reservation_range: [inputStartDate, inputEndDate],
+      users: userId,
+      meeting_rooms: this.route.snapshot.paramMap.get('id')
     }
+    this.reservationService.createReservation(data)
+      .pipe(
+        this.toast.observe({
+          loading: { content: 'Loading...' },
+          success: { content: 'Reservation created', position: 'bottom-center', duration: 2000 },
+          error: { content: 'Failed to create reservation', position: 'bottom-center', duration: 2000 }
+        })
+      )
+      .subscribe({
+        complete: () => {
+        },
+        error: (err) => {
+          this.toast.error(`${JSON.parse(err).error}`, { position: 'bottom-center' })
+        },
+        next: (res) => {
+          this.form.reset()
+          //this.router.navigateByUrl('/reservations/list')
+        }
+      })
+
   }
 
   formatDate(input: string) {

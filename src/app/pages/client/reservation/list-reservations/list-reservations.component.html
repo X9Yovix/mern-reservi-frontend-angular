@@ -10,6 +10,7 @@
           <th>Start Date</th>
           <th>End Date</th>
           <th>Additional Information</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -47,6 +48,11 @@
                   </div>
                 </div>
               </div>
+            </div>
+          </td>
+          <td>
+            <div *ngIf="reservation.status === 'pending'">
+              <button class="btn btn-success" (click)="cancelReservation(reservation._id)">Cancel</button>
             </div>
           </td>
         </tr>
