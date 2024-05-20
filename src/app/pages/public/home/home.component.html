@@ -1,1 +1,26 @@
-<p>home works!</p>
+<div class="video-container">
+  <video autoplay loop muted class="video-background">
+    <source src="../../../../assets/videos/V1.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <div class="overlay"></div>
+  <div class="container-center">
+    <h1 style="color: #fff; text-align: center;">Meeting Room Finder</h1>
+    <div *ngIf="!isAuth; then thenBlock else elseBlock"></div>
+    <ng-template #thenBlock>
+      <a routerLink="/login">
+        <button class="btn btn-sm me-2 btn-outline-light mt-5">
+          <i class="fa-solid fa-right-to-bracket me-2"></i> Sign In to discover meeting rooms
+        </button>
+      </a>
+    </ng-template>
+    <ng-template #elseBlock>
+      <a routerLink="/rooms/list">
+        <button class="btn btn-sm me-2 btn-outline-light mt-5">
+          <i class="fa-brands fa-discourse me-2"></i> Discover meeting rooms
+        </button>
+      </a>
+    </ng-template>
+  </div>
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "Lobster";
+  src: url(../../../../assets/fonts/Lobster-Regular.ttf) format("truetype");
+}
+
+footer {
+  -webkit-box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 11px 10px 0 rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 11px 10px 0 rgba(0, 0, 0, 0.12);
+  color: #fff;
+  background-color: #071447;
+  border-color: #071447;
+  height: 3vh;
+  text-align: center;
+  margin: auto;
+}
+
+.credits {
+  font-family: "Lobster" !important;
+  font-size: 15px !important;
+  color: #eee;
+}
