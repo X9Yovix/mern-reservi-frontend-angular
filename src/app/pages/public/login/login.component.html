@@ -1,9 +1,10 @@
 <div class="d-flex align-items-center">
   <div class="form-signin w-100 m-auto">
     <form [formGroup]="form" (submit)="onSubmit()">
-      <img class="mb-4" src="../../../assets/images/logo/reservi.png" alt="" width="72" height="72">
+      <div class="mb-4 text-center">
+        <img class="img-fluid" src="../../../assets/images/login.png" alt="login" width="200" height="200">
+      </div>
       <h1 class="h3 mb-3 fw-normal text-center m-auto">Please sign in</h1>
-
 
       <div class="col-md-12 mb-3">
         <label for="floatingInput" class="form-label"><i class="fa-solid fa-envelope"></i> Email</label>
@@ -18,7 +19,6 @@
           </small>
         </div>
       </div>
-
 
       <div class="col-md-12 mb-3">
         <label for="floatingPassword" class="form-label"><i class="fa-solid fa-lock"></i> Password</label>
