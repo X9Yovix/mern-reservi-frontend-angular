@@ -47,7 +47,7 @@ export class ReservationService {
 
   cancelReservation(reservationId: string): Observable<any> {
     return this.httpClient
-      .put(`/reservations/state/decision/${reservationId}`, { state: 2 }, this.httpOptions)
+      .put(`/reservations/state/decision/client/${reservationId}`, { state: 2 }, this.httpOptions)
       .pipe(
         catchError(this.errorHandler)
       )
